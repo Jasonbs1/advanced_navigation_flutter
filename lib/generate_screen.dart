@@ -19,12 +19,15 @@ class GenerateScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 int count = int.tryParse(_controller.text) ?? 0;
-                if (count <= 0) {
+
+                // Check if the number is valid, between 1 and 200
+                if (count <= 0 || count > 200) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Please enter a valid number')),
+                    SnackBar(content: Text('Please enter a number between 1 and 200')),
                   );
                   return;
                 }
+
                 for (int i = 1; i <= count; i++) {
                   Navigator.push(
                     context,

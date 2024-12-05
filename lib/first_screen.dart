@@ -55,12 +55,6 @@ class FirstScreen extends StatelessWidget {
               child: Text('Go to Second Screen'),
             ),
             SizedBox(height: 20),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     Navigator.pushNamed(context, '/third');
-            //   },
-            //   child: Text('Go to Third Screen'),
-            // ),
           ],
         ),
       ),
