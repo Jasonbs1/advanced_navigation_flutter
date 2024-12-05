@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class GenerateScreen extends StatelessWidget {
   @override
@@ -15,12 +16,16 @@ class GenerateScreen extends StatelessWidget {
               controller: _controller,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(labelText: 'Enter Number of Screens'),
+              inputFormatters: [
+                // Adding a limit of 3 digits for the number input
+                LengthLimitingTextInputFormatter(3),
+              ],
             ),
             ElevatedButton(
               onPressed: () {
                 int count = int.tryParse(_controller.text) ?? 0;
 
-                // Check if the number is valid, between 1 and 200
+                // Check if the number is valid and within the range of 1 to 200
                 if (count <= 0 || count > 200) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text('Please enter a number between 1 and 200')),

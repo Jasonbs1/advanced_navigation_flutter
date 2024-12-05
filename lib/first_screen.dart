@@ -1,6 +1,24 @@
 import 'package:flutter/material.dart';
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatefulWidget {
+  @override
+  _FirstScreenState createState() => _FirstScreenState();
+}
+
+class _FirstScreenState extends State<FirstScreen> {
+  int _currentIndex = 0;
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+    if (index == 1) {
+      Navigator.pushNamed(context, '/second');
+    } else if (index == 2) {
+      Navigator.pushNamed(context, '/third');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,18 +63,30 @@ class FirstScreen extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/second');
-              },
-              child: Text('Go to Second Screen'),
-            ),
-            SizedBox(height: 20),
-          ],
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/second');
+          },
+          child: Text('Go to Second Screen'),
         ),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: _onItemTapped,
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.arrow_forward),
+            label: 'Second',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.arrow_back),
+            label: 'Third',
+          ),
+        ],
       ),
     );
   }
